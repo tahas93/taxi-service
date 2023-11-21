@@ -9,7 +9,6 @@
 - Tailwind CSS v2
 - ESLint
 - Prettier
-- Husky & Lint Staged
 
 ## Getting Started
 
