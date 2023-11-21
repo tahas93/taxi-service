@@ -3,13 +3,13 @@
 import * as React from 'react';
 import { RiAlarmWarningFill } from 'react-icons/ri';
 
-export default function Error({
+const Error = ({
   error,
   reset,
-}: {
+}:{
   error: Error & { digest?: string };
   reset: () => void;
-}) {
+}) => {
   React.useEffect(() => {
     // eslint-disable-next-line no-console
     console.error(error);
@@ -19,6 +19,7 @@ export default function Error({
     <main>
       <section className='bg-white'>
         <div className='layout flex min-h-screen flex-col items-center justify-center text-center text-black'>
+          {/* @ts-ignore */}
           <RiAlarmWarningFill
             size={60}
             className='drop-shadow-glow animate-flicker text-red-500'
@@ -34,3 +35,5 @@ export default function Error({
     </main>
   );
 }
+
+export default Error;

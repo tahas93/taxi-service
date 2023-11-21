@@ -8,9 +8,10 @@ const theme = {
   },
 };
 
-function MyApp({ Component, pageProps }: AppProps): JSX.Element {
+const MyApp = ({ Component, pageProps }: AppProps): JSX.Element => {
   return (
     <>
+      {/* @ts-ignore */}
       <ThemeProvider theme={theme}>
         {/* @ts-ignore */}
         <Component {...pageProps} />
