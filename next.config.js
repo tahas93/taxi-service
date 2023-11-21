@@ -1,50 +1,35 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  eslint: {
-    dirs: ['src'],
-  },
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+});
 
-  reactStrictMode: true,
-  swcMinify: true,
-
-  // Uncoment to add domain whitelist
-  // images: {
-  //   domains: [
-  //     'res.cloudinary.com',
-  //   ],
-  // },
-
-  webpack(config) {
-    // Grab the existing rule that handles SVG imports
-    const fileLoaderRule = config.module.rules.find((rule) =>
-      rule.test?.test?.('.svg')
-    );
-
-    config.module.rules.push(
-      // Reapply the existing rule, but only for svg imports ending in ?url
+module.exports = withBundleAnalyzer({
+  plugins: [
+    'postcss-flexbugs-fixes',
+    [
+      'postcss-preset-env',
       {
-        ...fileLoaderRule,
-        test: /\.svg$/i,
-        resourceQuery: /url/, // *.svg?url
-      },
-      // Convert all other *.svg imports to React components
-      {
-        test: /\.svg$/i,
-        issuer: { not: /\.(css|scss|sass)$/ },
-        resourceQuery: { not: /url/ }, // exclude if *.svg?url
-        loader: '@svgr/webpack',
-        options: {
-          dimensions: false,
-          titleProp: true,
+        autoprefixer: {
+          flexbox: 'no-2009',
         },
-      }
-    );
-
-    // Modify the file loader rule to ignore *.svg, since we have it handled now.
-    fileLoaderRule.exclude = /\.svg$/i;
-
-    return config;
+        stage: 3,
+        features: {
+          'custom-properties': false,
+        },
+      },
+    ],
+    [
+      '@fullhuman/postcss-purgecss',
+      {
+        content: [
+          './pages/**/*.{js,jsx,ts,tsx}',
+          './src/**/*.{js,jsx,ts,tsx}',
+        ],
+        defaultExtractor: (content) => content.match(/[\w-/:]+(?<!:)/g) || [],
+        safelist: ['html', 'body'],
+      },
+    ],
+  ],
+  images: {
+    domains: ['localhost:3000'],
   },
-};
-
-module.exports = nextConfig;
+});
