@@ -1,44 +1,25 @@
 import BookingForm from '@components/BookingForm';
-import { useState } from 'react';
+import { ApplicationContext } from '@src/store/ApplicationContext';
+import { addBooking } from '@src/store/BookingsReducer';
+import { useContext, useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 const Book = () => {
   const [isSubmit, setSubmit] = useState(false);
-  const [formData, setFormData] = useState({
-    fullname: '',
-    phone: '',
-    pickup_location: '',
-    destination: '',
-    copessangers: '',
-  });
 
-  const handleInput = (e: any) => {
-    const fieldName = e.target.name;
-    const fieldValue = e.target.value;
+  const dispatch = useDispatch();
+  const { sharedValue } = useContext(ApplicationContext);
 
-    setFormData((prevState) => ({
-      ...prevState,
-      [fieldName]: fieldValue,
-    }));
-  };
-
-  const submitForm = (e: any) => {
+  const submitForm = (e:any) => {
     e.preventDefault();
-    const userArr: any = [];
-    const userObj = Object.assign({ formData });
-    const bookings = localStorage.getItem('booking');
+    const formData = new FormData(e.target);
+    const formValues = Object.fromEntries(formData);
 
-    if (bookings === null) {
-      // console.log('if');
-      userArr.push(userObj);
-      localStorage.setItem('booking', JSON.stringify(userArr));
-    } else {
-      // console.log('else');
-      const tempArr = JSON.parse(bookings);
-      tempArr.push(userObj);
-      localStorage.setItem('booking', JSON.stringify(tempArr));
-    }
+    dispatch(addBooking(JSON.stringify(formValues)));
+    sharedValue.push(formValues);
     setSubmit(true);
-  };
+  }
+  
   return (
     <>
       <div className='flex w-full flex-wrap items-center justify-center'>
@@ -59,7 +40,7 @@ const Book = () => {
         )}
       </div>
       {/* @ts-ignore */}
-      <BookingForm handleInput={handleInput} submitForm={submitForm} />
+      <BookingForm submitForm={submitForm} />
     </>
   )
 }

@@ -6,7 +6,7 @@ export type Props = {
   pageName?: string;
 };
 
-export default (
+const WithLayout = (
   ComposedComponent: any,
   title: string,
   pageName: string
@@ -24,3 +24,5 @@ export default (
 
   return withLayout;
 };
+
+export default WithLayout;

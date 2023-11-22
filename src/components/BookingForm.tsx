@@ -1,13 +1,13 @@
 interface BookingFormProps {
   submitForm: (x: any) => void;
-  handleInput: (x: any) => void;
 }
 
 const BookingForm = (props: BookingFormProps) => {
-  const { submitForm, handleInput } = props;
+  const { submitForm } = props;
   return (
     <form
       method='post'
+      id="bookingForm"
       onSubmit={submitForm}
       className='mx-auto xs:w-full lg:w-auto lg:max-w-md rounded-md bg-white bg-opacity-40 p-5 shadow-xl'
     >
@@ -19,7 +19,6 @@ const BookingForm = (props: BookingFormProps) => {
             id='fullname'
             className='peer block w-full appearance-none border-0 border-b-2 border-gray-500 bg-transparent px-0 py-2.5 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0'
             placeholder=' '
-            onChange={handleInput}
             required
           />
           <label
@@ -37,7 +36,6 @@ const BookingForm = (props: BookingFormProps) => {
             id='phone'
             className='peer block w-full appearance-none border-0 border-b-2 border-gray-500 bg-transparent px-0 py-2.5 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0'
             placeholder=' '
-            onChange={handleInput}
             required
           />
           <label
@@ -56,7 +54,6 @@ const BookingForm = (props: BookingFormProps) => {
             id='pickup_location'
             className='peer block w-full appearance-none border-0 border-b-2 border-gray-500 bg-transparent px-0 py-2.5 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0'
             placeholder=' '
-            onChange={handleInput}
             required
           />
           <label
@@ -75,7 +72,6 @@ const BookingForm = (props: BookingFormProps) => {
             id='destination'
             className='peer block w-full appearance-none border-0 border-b-2 border-gray-500 bg-transparent px-0 py-2.5 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0'
             placeholder=' '
-            onChange={handleInput}
             required
           />
           <label
@@ -94,7 +90,6 @@ const BookingForm = (props: BookingFormProps) => {
             id='copessangers'
             className='peer block w-full appearance-none border-0 border-b-2 border-gray-500 bg-transparent px-0 py-2.5 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0'
             placeholder=' '
-            onChange={handleInput}
           />
           <label
             htmlFor='copessangers'

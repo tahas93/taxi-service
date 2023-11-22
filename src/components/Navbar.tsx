@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Link from 'next/link';
 
 interface NavbarProps {
   pageName: string;
@@ -61,14 +62,16 @@ const Navbar = (props: NavbarProps) => {
                 </svg>
               )}
               <li>
-                <a
-                  className={`hover:text-semibold text-sm ${
-                    item.name === pageName ? 'text-white' : 'text-black'
-                  }`}
-                  href={item.link}
-                >
-                  {item.name}
-                </a>
+                {/* @ts-ignore */}
+                <Link href={item.link}>
+                  <p
+                    className={`cursor-pointer hover:text-semibold text-sm ${
+                      item.name === pageName ? 'text-white' : 'text-black'
+                    }`}
+                  >
+                    {item.name}
+                  </p>
+                </Link>
               </li>
             </>
           ))}
@@ -128,14 +131,16 @@ const Navbar = (props: NavbarProps) => {
             <ul>
               {navList.map((item, ind) => (
                 <li key={ind} className='mb-1'>
-                  <a
-                    className={`block rounded p-4 text-sm font-semibold hover:bg-blue-50 hover:text-blue-600 ${
-                      item.name === pageName ? 'text-blue-600' : 'text-gray-400'
-                    }`}
-                    href={item.link}
-                  >
-                    {item.name}
-                  </a>
+                  {/* @ts-ignore */}
+                  <Link href={item.link}>
+                    <p
+                      className={`cursor-pointer block rounded p-4 text-sm font-semibold hover:bg-blue-50 hover:text-blue-600 ${
+                        item.name === pageName ? 'text-blue-600' : 'text-gray-400'
+                      }`}
+                    >
+                      {item.name}
+                    </p>
+                  </Link>
                 </li>
               ))}
             </ul>

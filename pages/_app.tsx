@@ -1,4 +1,7 @@
+import { store } from '@src/store';
+import ApplicationContextProvider from '@src/store/ApplicationContext';
 import type { AppProps } from 'next/app';
+import { Provider } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
 import 'styles/index.css';
 
@@ -10,13 +13,17 @@ const theme = {
 
 const MyApp = ({ Component, pageProps }: AppProps): JSX.Element => {
   return (
-    <>
+    // @ts-ignore
+    <ApplicationContextProvider>
       {/* @ts-ignore */}
-      <ThemeProvider theme={theme}>
+      <Provider store={store}>
         {/* @ts-ignore */}
-        <Component {...pageProps} />
-      </ThemeProvider>
-    </>
+        <ThemeProvider theme={theme}>
+          {/* @ts-ignore */}
+          <Component {...pageProps} />
+        </ThemeProvider>
+      </Provider>
+    </ApplicationContextProvider>
   );
 }
 

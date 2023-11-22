@@ -9,6 +9,7 @@
 - Tailwind CSS v2
 - ESLint
 - Prettier
+- Redux / ReduxToolkit
 
 ## Getting Started
 
