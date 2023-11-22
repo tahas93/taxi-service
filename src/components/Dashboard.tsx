@@ -20,7 +20,7 @@ const Dashboard = () => {
         />
       </div>
       <div className='flex w-full items-center justify-center'>
-        {bookings === undefined ? (
+        {bookings?.length === 0 ? (
           <h1 className='text-xl font-semibold text-red-500'>No Bookings Available</h1>
         ) : (
           <ul className='flex w-full max-w-md flex-wrap items-center justify-start space-y-4'>
